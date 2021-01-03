@@ -1,33 +1,42 @@
-import React from 'react';
-import unsplash from '../api/unsplash';
-import SearchBar from './SearchBar';
-import ImageList from './ImageList';
-import Menu from './Menu';
+import React from "react";
+import SearchBar from "./SearchBar";
+import Menu from "./Menu";
+import ShowList from "./ShowList";
+import ShowSideBar from "./ShowSideBar";
+
+import listOfAlbunSongs from "../data/data";
 
 class App extends React.Component {
+  state = {
+    listType: "Album",
+    searchKey: "",
+    list: listOfAlbunSongs,
+  };
 
-  state = {images: []};
+  onSearchSubmit = (searchKey) => {
+    this.setState({ searchKey: searchKey });
+    const regex = new RegExp(searchKey.toLowerCase());
+    let list = listOfAlbunSongs.filter((album) =>
+      regex.test(album.name.toLowerCase())
+    );
 
-   onSearchSubmit = async (term) => {
-    const response = await unsplash.get('/search/photos',{
-      params: { query: term },
-    });
+    //    console.log ("list-", list);
+    this.setState({ list: list });
+  };
 
-    this.setState({ images: response.data.results })
-  }
-
-  render () {
+  render() {
     return (
-      <div className="ui container" style={{marginTop: '10px'}}>
+      <div>
         <Menu />
-      </div>
-      <div className="ui container" style={{marginTop: '10px'}}>
-        <SearchBar onSubmit={this.onSearchSubmit}/>
-        <ImageList images={this.state.images} />
-        Found: {this.state.images.length} images
+        <div className="ui segment" style={{ marginTop: "10px" }}>
+          <SearchBar onSubmit={this.onSearchSubmit} />
+          <ShowList list={this.state.list} />
+          <ShowSideBar />
+          Found: {this.state.list.length} {this.state.listType}
+        </div>
       </div>
     );
-  };
-};
+  }
+}
 
 export default App;
