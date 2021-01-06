@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-const ImageList = (props) => {
-  const { images } = props;
+const ImageList = ({ images }) => {
   const renderedImages = images.map(({ description, id, urls }) => (
     <div key={id}>
       <img src={urls.regular} alt={description} />

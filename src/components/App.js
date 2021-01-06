@@ -1,38 +1,47 @@
 import React from "react";
 import SearchBar from "./SearchBar";
-import Menu from "./Menu";
-import ShowList from "./ShowList";
-import ShowSideBar from "./ShowSideBar";
+import AlbumList from "./AlbumList";
+import SongsList from "./SongsList";
 
 import listOfAlbunSongs from "../data/data";
 
 class App extends React.Component {
   state = {
-    listType: "Album",
-    searchKey: "",
     list: listOfAlbunSongs,
+    songs: [],
   };
 
   onSearchSubmit = (searchKey) => {
     this.setState({ searchKey: searchKey });
     const regex = new RegExp(searchKey.toLowerCase());
     let list = listOfAlbunSongs.filter((album) =>
-      regex.test(album.name.toLowerCase())
+      regex.test(album.author.toLowerCase())
     );
 
-    //    console.log ("list-", list);
     this.setState({ list: list });
+  };
+
+  onAlbumCardClick = (songs) => {
+    this.setState({ songs: songs });
   };
 
   render() {
     return (
       <div>
-        <Menu />
-        <div className="ui segment" style={{ marginTop: "10px" }}>
+        <div className="ui grid centered segment">
           <SearchBar onSubmit={this.onSearchSubmit} />
-          <ShowList list={this.state.list} />
-          <ShowSideBar />
-          Found: {this.state.list.length} {this.state.listType}
+        </div>
+        <div className="ui grid centered segment">
+          <div className="orange five wide column">
+            <AlbumList
+              list={this.state.list}
+              onAlbumCardClick={this.onAlbumCardClick}
+            />
+            Found: {this.state.list.length}
+          </div>
+          <div className="five wide column ">
+            <SongsList songs={this.state.songs} />
+          </div>
         </div>
       </div>
     );

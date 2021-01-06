@@ -1,22 +1,36 @@
+// Libraries
+import React from "react";
 
-import React from 'react';
+import PropTypes from "prop-types";
+import uuid from "react-uuid";
 
-import SongList from './SongList';
+class AlbumCard extends React.Component {
+  state = {
+    album: this.props.Album,
+  };
 
-const AlbumCard = (props) => {
-    
-    
+  onClick = (event) => {
+    event.preventDefault();
+    this.props.onAlbumCardClick(this.state.album.songs);
+  };
+
+  render() {
     return (
-        <div className="ui">
-            <div className="">
-                <h3>
-                    {props.Album.name}
-                </h3>
-                <SongList songs={props.Album.songs}/>
-            </div>
-        </div>
+      <div className="ui button column" onClick={this.onClick}>
+        <h3>
+          band: <b>{this.state.album.author}</b>
+        </h3>
+        <h5>
+          album name: <b>{this.state.album.name}</b>
+        </h5>
+        <p>year: {this.state.album.date}</p>
+      </div>
     );
-};
+  }
+}
 
+AlbumCard.protoType = {
+  Album: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default AlbumCard;

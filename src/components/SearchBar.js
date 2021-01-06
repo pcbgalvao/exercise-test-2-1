@@ -1,37 +1,37 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
 class SearchBar extends React.Component {
-  state = { term: '' };
+  state = { term: "" };
 
-  onInputChange = event => {
+  onInputChange = (event) => {
     event.preventDefault();
-    
+
     let inputValue = event.target.value;
     this.setState({ term: inputValue });
     console.log("onInputChange-" + inputValue + "--");
     this.props.onSubmit(inputValue);
-
-  }
+  };
   onFormSubmit = (event) => {
     event.preventDefault();
-    
+
     this.props.onSubmit(this.state.term);
-  }
+  };
 
   render() {
     return (
-      <div className="ui segment">
-        <div className="ui search">
-          <form
-            className="ui form"
-            onSubmit={this.onFormSubmit}>
+      <div className="ui center aligned container">
+        <div className="raised">
+          <form className="ui form" onSubmit={this.onFormSubmit}>
             <div className="field">
-              <label htmlFor='input' >Input: </label>
+              <label htmlFor="input"></label>
               <input
-                className="prompt"
+                className="prompt orange"
                 type="text"
                 value={this.state.term}
-                onChange={this.onInputChange} />
+                placeholder="Choose a Band"
+                onChange={this.onInputChange}
+              />
             </div>
           </form>
         </div>
@@ -39,5 +39,9 @@ class SearchBar extends React.Component {
     );
   }
 }
+
+SearchBar.protoType = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default SearchBar;
