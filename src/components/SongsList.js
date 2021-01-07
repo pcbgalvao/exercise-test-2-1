@@ -1,14 +1,14 @@
 // Libraries
 import React from "react";
-import PropTypes from "prop-types";
+import uuid from "react-uuid";
 
-const SongsList = ({ songs }) => {
-  console.log("songs");
+const SongsList = ({ albumPicked }) => {
+  const { songs, author, name } = albumPicked;
   let renderedSongs = null;
-  if (songs.length > 0) {
+  if (!!songs && songs.length > 0) {
     renderedSongs = songs.map((song) => {
       return (
-        <div className="ui center aligned">
+        <div className="ui item center aligned" key={uuid()}>
           <div className="ui column blue inverted segment">
             <p>{song}</p>
           </div>
@@ -18,17 +18,15 @@ const SongsList = ({ songs }) => {
   }
 
   return (
-    <div className="ui grid equal width center aligned padded grid">
-      <div className="ui grid center">
-        <p>Titles Songs</p>
-      </div>
+    <div className="ui list">
+      {author !== undefined && (
+        <div className="ui title">
+          Titles Songs for Album <i>{name}</i> Band <i>{author}</i>
+        </div>
+      )}
       {renderedSongs}
     </div>
   );
-};
-
-SongsList.propTypes = {
-  songs: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default SongsList;

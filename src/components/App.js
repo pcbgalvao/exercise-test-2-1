@@ -8,7 +8,7 @@ import listOfAlbunSongs from "../data/data";
 class App extends React.Component {
   state = {
     list: listOfAlbunSongs,
-    songs: [],
+    albumPicked: [],
   };
 
   onSearchSubmit = (searchKey) => {
@@ -21,26 +21,33 @@ class App extends React.Component {
     this.setState({ list: list });
   };
 
-  onAlbumCardClick = (songs) => {
-    this.setState({ songs: songs });
+  onAlbumCardClick = (albumPicked) => {
+    this.setState({ albumPicked });
+  };
+
+  cleanSongList = () => {
+    this.setState({ albumPicked: [] });
   };
 
   render() {
     return (
       <div>
         <div className="ui grid centered segment">
-          <SearchBar onSubmit={this.onSearchSubmit} />
+          <SearchBar
+            onSubmit={this.onSearchSubmit}
+            cleanSongList={this.cleanSongList}
+          />
         </div>
         <div className="ui grid centered segment">
-          <div className="orange five wide column">
+          <div className="orange seven wide column">
             <AlbumList
               list={this.state.list}
               onAlbumCardClick={this.onAlbumCardClick}
             />
             Found: {this.state.list.length}
           </div>
-          <div className="five wide column ">
-            <SongsList songs={this.state.songs} />
+          <div className="eight wide column ">
+            <SongsList albumPicked={this.state.albumPicked} />
           </div>
         </div>
       </div>
