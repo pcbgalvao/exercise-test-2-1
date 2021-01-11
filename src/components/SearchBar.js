@@ -1,7 +1,14 @@
 import React from "react";
 
 class SearchBar extends React.Component {
-  state = { term: "" };
+  state = {
+    term: "",
+    haveFocus: false,
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.haveFocus;
+  }
 
   onInputChange = (event) => {
     event.preventDefault();
@@ -9,26 +16,29 @@ class SearchBar extends React.Component {
     let inputValue = event.target.value;
     this.setState({ term: inputValue });
 
-    this.props.onSubmit(inputValue);
+    this.props.onChange(inputValue);
   };
-  onFormSubmit = (event) => {
+
+  onFocusIn = (event) => {
     event.preventDefault();
-
-    this.props.onSubmit(this.state.term);
-  };
-
-  onFocus = () => {
+    this.setState({ haveFocus: true });
     this.props.cleanSongList();
   };
 
+  onFocusOut = (event) => {
+    event.preventDefault();
+    this.setState({ haveFocus: false });
+  };
+
   render() {
+    console.count("SearchBar");
     return (
       <div className="ui center aligned container">
         <div className="raised">
           <form
             className="ui form"
-            onSubmit={this.onFormSubmit}
-            onFocus={this.onFocus}
+            onFocus={this.onFocusIn}
+            onBlur={this.onFocusOut}
           >
             <div className="field">
               <label htmlFor="input"></label>

@@ -1,7 +1,8 @@
 // Info from: https://en.wikipedia.org/wiki/List_of_greatest_hits_names
 //
-const listOfAlbunSongs = [
+const listOfAlbunsSongs = [
   {
+    id: 1,
     name: "Greatest Hits by A",
     author: "Teens",
     date: "2005",
@@ -25,6 +26,7 @@ const listOfAlbunSongs = [
     ],
   },
   {
+    id: 2,
     name: "Greatest Hits",
     author: "ABBA",
     date: "1975",
@@ -47,6 +49,7 @@ const listOfAlbunSongs = [
     ],
   },
   {
+    id: 3,
     name: "Bob Dylan's Greatest Hits",
     author: "Bob Dylan",
     date: "1967",
@@ -65,4 +68,4 @@ const listOfAlbunSongs = [
   },
 ];
 
-export default listOfAlbunSongs;
+export default listOfAlbunsSongs;
