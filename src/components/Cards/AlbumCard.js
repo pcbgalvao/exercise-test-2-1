@@ -3,20 +3,24 @@ import React from "react";
 import uuid from "react-uuid";
 
 class AlbumCard extends React.PureComponent {
-  onClick = (event) => {
+  constructor() {
+    super();
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(event) {
     event.preventDefault();
     this.props.onAlbumCardClick(this.props.album);
-  };
+  }
 
   render() {
     console.count("AlbumCard");
     return (
       <div className="ui item button column" onClick={this.onClick}>
-        <div className="ui text Title">Band</div>
-        <div className="ui text content">{this.props.album.author}</div>
-        <div className="ui text Title">Album name</div>
-        <div className="ui text content">{this.props.album.name}</div>
-        <div>year: {this.props.album.date}</div>
+        <div className="ui text content">
+          <p>Band: {this.props.album.author}</p>
+          Album name: {this.props.album.name} - {this.props.album.date}
+        </div>
       </div>
     );
   }

@@ -17,6 +17,7 @@ class SongsList extends React.PureComponent {
           Titles Songs for Album <i>{name}</i> Band <i>{author}</i>
         </div>
       );
+
       renderedSongs = songs.map((song) => {
         return (
           <div className="ui item center aligned" key={uuid()}>

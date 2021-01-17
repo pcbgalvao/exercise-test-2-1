@@ -66,6 +66,20 @@ const listOfAlbunsSongs = [
       "Just Like a Woman",
     ],
   },
+  {
+    id: 4,
+    name: "Greatest Hits by A",
+    author: "Teens",
+    date: "2005",
+    songs: [
+      "one two...",
+      "apples",
+      "the sum",
+      "the red carpet",
+      "the moon and the the flower",
+      "Perfect Walk",
+    ],
+  },
 ];
 
 export default listOfAlbunsSongs;

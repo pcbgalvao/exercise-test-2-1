@@ -1,34 +1,42 @@
 import React from "react";
 
 class SearchBar extends React.Component {
-  state = {
-    term: "",
-    haveFocus: false,
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      term: "",
+      haveFocus: false,
+    };
+
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onFocusIn = this.onFocusIn.bind(this);
+    this.onFocusOut = this.onFocusOut.bind(this);
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.haveFocus;
   }
 
-  onInputChange = (event) => {
+  onInputChange(event) {
     event.preventDefault();
 
     let inputValue = event.target.value;
     this.setState({ term: inputValue });
 
     this.props.onChange(inputValue);
-  };
+  }
 
-  onFocusIn = (event) => {
+  onFocusIn(event) {
     event.preventDefault();
     this.setState({ haveFocus: true });
     this.props.cleanSongList();
-  };
+  }
 
-  onFocusOut = (event) => {
+  onFocusOut(event) {
     event.preventDefault();
     this.setState({ haveFocus: false });
-  };
+  }
 
   render() {
     console.count("SearchBar");

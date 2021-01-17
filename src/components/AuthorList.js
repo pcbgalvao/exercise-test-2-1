@@ -11,40 +11,46 @@ import SearchBar from "./SearchBar";
 import listOfAlbunsSongs from "../data/data";
 
 class AuthorList extends React.Component {
-  state = {
-    albumPicked: {},
-    albumList: listOfAlbunsSongs,
-    filteredAlbum: listOfAlbunsSongs,
-  };
+  constructor() {
+    super();
+    this.state = {
+      albumPicked: {},
+      albumList: listOfAlbunsSongs,
+      filteredAlbum: listOfAlbunsSongs,
+    };
+
+    this.onSearchChange = this.onSearchChange.bind(this);
+    this.onAlbumCardClick = this.onAlbumCardClick.bind(this);
+    this.cleanSongList = this.cleanSongList.bind(this);
+  }
 
   componentDidMount() {
     this.setState({ albumList: listOfAlbunsSongs });
   }
 
-  onSearchChange = (searchKey) => {
+  onSearchChange(searchKey) {
     const regex = new RegExp(searchKey.toLowerCase());
     let filteredAlbum = this.state.albumList.filter((album) =>
       regex.test(album.author.toLowerCase())
     );
     // console.log("AlbumComponent.onSearchChange-", filteredAlbum);
     this.setState({ filteredAlbum: filteredAlbum });
-  };
+  }
 
-  onAlbumCardClick = (albumPicked) => {
+  onAlbumCardClick(albumPicked) {
     if (
       Object.keys(this.state.albumPicked).length === 0 ||
-      (albumPicked.name !== this.state.albumPicked.name &&
-        albumPicked.author !== this.state.albumPicked.author)
+      albumPicked.id !== this.state.albumPicked.id
     ) {
       this.setState({ albumPicked: albumPicked });
     }
-  };
+  }
 
-  cleanSongList = () => {
+  cleanSongList() {
     if (Object.keys(this.state.albumPicked).length > 0) {
       this.setState({ albumPicked: {} });
     }
-  };
+  }
 
   render() {
     console.count("AuthorList");
@@ -59,14 +65,15 @@ class AuthorList extends React.Component {
           />
         </div>
         <div className="ui grid centered segment">
-          <div className="five wide column ">
+          <div className="eight wide column ">
             <ListRecords
               albumList={this.state.filteredAlbum}
               onAlbumCardClick={this.onAlbumCardClick}
             />
           </div>
-          <SongsList albumPicked={this.state.albumPicked} />
-          <div className="five wide column "></div>
+          <div className="eight wide column ">
+            <SongsList albumPicked={this.state.albumPicked} />
+          </div>
         </div>
       </div>
     );

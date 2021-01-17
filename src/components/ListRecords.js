@@ -28,7 +28,7 @@ class ListRecords extends React.PureComponent {
     let renderedAlbumList = null;
     const albumList = this.props.albumList;
 
-    if (Object.keys(this.props.albumList).length > 0) {
+    if (this.props.albumList) {
       renderedAlbumList = albumList.map((album) => {
         return (
           <div className="ui list container segment" key={uuid()}>
@@ -43,9 +43,7 @@ class ListRecords extends React.PureComponent {
 
     return (
       <div>
-        <div className="five wide column ">
-          <div>{renderedAlbumList}</div>
-        </div>
+        <div>{renderedAlbumList}</div>
       </div>
     );
   }
