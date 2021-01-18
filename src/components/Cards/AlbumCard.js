@@ -4,7 +4,7 @@ import uuid from "react-uuid";
 
 class AlbumCard extends React.PureComponent {
   constructor() {
-    super();
+    super(props);
     this.onClick = this.onClick.bind(this);
   }
 

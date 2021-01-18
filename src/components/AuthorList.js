@@ -12,7 +12,7 @@ import listOfAlbunsSongs from "../data/data";
 
 class AuthorList extends React.Component {
   constructor() {
-    super();
+    super(props);
     this.state = {
       albumPicked: {},
       albumList: listOfAlbunsSongs,
@@ -75,6 +75,7 @@ class AuthorList extends React.Component {
             <SongsList albumPicked={this.state.albumPicked} />
           </div>
         </div>
+        version 2.1
       </div>
     );
   }
