@@ -11,7 +11,7 @@ import SearchBar from "./SearchBar";
 import listOfAlbunsSongs from "../data/data";
 
 class AuthorList extends React.Component {
-  constructor() {
+  constructor(props) {
     super(props);
     this.state = {
       albumPicked: {},

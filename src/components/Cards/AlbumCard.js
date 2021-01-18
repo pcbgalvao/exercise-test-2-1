@@ -3,7 +3,7 @@ import React from "react";
 import uuid from "react-uuid";
 
 class AlbumCard extends React.PureComponent {
-  constructor() {
+  constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
   }
